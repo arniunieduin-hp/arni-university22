@@ -264,10 +264,7 @@
     </div>
 
     <script>
-    
-
-      
-function view(id, el) {
+    function view(id, el) {
     // hide all panels
     document.querySelectorAll('.panel').forEach(p => p.classList.add('hidden'));
 
@@ -296,7 +293,9 @@ function view(id, el) {
                 <tr><td>CE(107)-P</td><td>MECH LAB</td><td>1</td><td>B</td></tr>
                 <tr><td>CE(108)-P</td><td>WORKSHOP LAB</td><td>2</td><td>A</td></tr>`;
                 document.getElementById('resFooter').innerText = "SGPA: 8.1 | CGPA: 7.91 | RESULT: PASSED";
-            } else {
+            } 
+else {
+   
                 document.getElementById('resHeader').innerText = "STATEMENT OF GRADES - JULY 2012";
                 table.innerHTML = `<tr class="th-bg"><td>Code</td><td>Subject</td><td>Credits</td><td>Grade</td></tr>
                 <tr><td>AU-BTC-201</td><td>MATH-II</td><td>4</td><td>B+</td></tr>
@@ -310,6 +309,9 @@ function view(id, el) {
                 document.getElementById('resFooter').innerText = "SGPA: 7.9 | CGPA: 7.51 | RESULT: PASSED";
             }
         }
+        window.onload = function () {
+    view('dash', document.querySelector('.nav-item'));
+};
     </script>
 </body>
 </html>
