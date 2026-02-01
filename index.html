@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta name="google-site-verification" content="897zPHGahS8curCOwzhB0_DjBOb7z3gFRq_2tkg7kgw" />
@@ -13,117 +13,171 @@
             --arni-yellow: #f1c40f;
             --bg-gray: #f8f9fa;
         }
-        body, html { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
 
+        body, html { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; scroll-behavior: smooth; }
+
+        /* Top Bar */
         .top-nav { background: #f0fdf4; padding: 10px 5%; display: flex; justify-content: flex-end; gap: 12px; font-size: 13px; border-bottom: 1px solid #dcfce7; }
         .top-nav a { text-decoration: none; color: #166534; font-weight: 600; padding: 5px 12px; border-radius: 4px; border: 1px solid #bbf7d0; }
 
-        header { background: var(--arni-dark); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; }
+        /* Main Header */
+        header { background: var(--arni-dark); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
         .logo img { height: 65px; }
         .nav-links { display: flex; list-style: none; gap: 15px; margin: 0; }
-        .nav-links li a { color: white; text-decoration: none; font-size: 11px; font-weight: 700; }
+        .nav-links li a { color: white; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; }
 
+        /* Hero Section - Layout remains SAME */
         .hero { display: flex; height: 85vh; background: linear-gradient(to right, #fff 55%, #e6f7ef 45%); }
-        .hero-left { width: 55%; padding: 40px 5%; }
-        .image-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .image-container img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
-        .image-container img.main-img { grid-column: span 2; height: 300px; }
+        .hero-left { width: 55%; padding: 40px 5%; display: flex; align-items: center; justify-content: center; }
+        
+        /* Image Collage for Campus, Classroom, Workshop */
+        .image-container { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            width: 100%; 
+        }
+        .image-container img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .image-container img.main-img { 
+            grid-column: span 2; 
+            height: 300px; 
+        }
 
-        footer { background: #002b1d; color: white; padding: 40px 5%; text-align: center; }
+        .admission-card { background: white; width: 380px; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 5px solid var(--arni-light); margin-left: auto; }
+        .admission-card h3 { color: var(--arni-light); text-align: center; margin-bottom: 20px; }
+        .admission-card input, .admission-card select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; }
 
-        /* LOGIN OVERLAY */
-        #loginBox{
-            display:none;
-            position:fixed;
-            inset:0;
-            background:rgba(0,0,0,.6);
-            z-index:9999;
-            align-items:center;
-            justify-content:center;
-        }
-        #loginBox .card{
-            background:#fff;
-            width:360px;
-            padding:30px;
-            border-radius:12px;
-            text-align:center;
-        }
-        #loginBox input{
-            width:100%;
-            padding:10px;
-            margin:8px 0;
-        }
+        /* Guidelines & Leadership (Same as before) */
+        .guidelines-section { padding: 60px 5%; background: white; }
+        .section-title { color: var(--arni-dark); font-size: 28px; margin-bottom: 30px; font-weight: bold; }
+        .guideline-container { display: flex; gap: 30px; align-items: flex-start; }
+        .guideline-main-img { width: 40%; }
+        .guideline-main-img img { width: 100%; border-radius: 10px; }
+        .icon-grid { width: 60%; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .icon-box { text-align: center; border: 1px solid #eee; padding: 15px 5px; border-radius: 8px; }
+        .icon-box i { font-size: 30px; color: var(--arni-light); margin-bottom: 10px; display: block; }
+        .icon-box p { font-size: 11px; font-weight: 600; color: #333; margin: 0; }
+
+        .program-selector { background: var(--arni-dark); padding: 40px 5%; color: white; }
+        .selector-row { display: flex; gap: 20px; align-items: flex-end; }
+        .selector-item { flex: 1; }
+        .selector-item select { width: 100%; padding: 12px; border-radius: 4px; margin-top: 10px; }
+
+        .leadership { padding: 60px 5%; text-align: center; background: var(--bg-gray); }
+        .leader-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-top: 40px; }
+        .leader-card img { width: 130px; height: 130px; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); object-fit: cover; }
+
+        footer { background: #002b1d; color: white; padding: 60px 5% 20px; }
+        .footer-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 40px; }
+        .footer-box h3 { color: var(--arni-yellow); font-size: 18px; margin-bottom: 20px; }
+        .copyright-bar { text-align: center; padding-top: 20px; color: #94a3b8; font-size: 12px; }
     </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="top-nav">
-    <a href="#">Public Notice</a>
-    <a href="#">Alumni Meet</a>
-    <a href="#" onclick="openLogin()" style="background:#bbf7d0;">Student Login</a>
-</div>
+    <div class="top-nav">
+        <a href="#">Public Notice</a>
+        <a href="#">Alumni Meet</a>
+     <a href="dashboard.html" style="background: #bbf7d0;">
+  Student Login
+</a>
 
-<!-- HEADER -->
-<header>
-    <div class="logo">
-        <img src="https://i.ibb.co/V0nT8RJN/arni-new-logo.png">
     </div>
-    <ul class="nav-links">
-        <li><a href="#">ACADEMIC</a></li>
-        <li><a href="#">ADMISSIONS</a></li>
-        <li><a href="#">CAMPUS LIFE</a></li>
-        <li><a href="#">ABOUT</a></li>
-    </ul>
-</header>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-left">
-        <div class="image-container">
-            <img src="https://i.ibb.co/KxKyj54W/college-campus.jpg" class="main-img">
-            <img src="https://i.ibb.co/HLcXTGFC/classroom.jpg">
-            <img src="https://i.ibb.co/Cp290BtQ/workshop.jpg">
+    <header>
+        <div class="logo">
+            <img src="https://i.ibb.co/V0nT8RJN/arni-new-logo.png" alt="Arni Logo">
         </div>
-    </div>
-</section>
+        <ul class="nav-links">
+            <li><a href="#">ACADEMIC</a></li><li><a href="#">ADMISSIONS</a></li><li><a href="#">CAMPUS LIFE</a></li>
+            <li><a href="#">ABOUT</a></li><li><a href="#">CONNECT</a></li><li><a href="#">RESEARCH</a></li>
+        </ul>
+        <a href="#" style="background:white; color:black; padding:10px 20px; border-radius:4px; font-weight:bold; text-decoration:none; font-size:12px;">APPLY NOW</a>
+    </header>
 
-<footer>
-    © 2011 ARNI University | All Rights Reserved
-</footer>
+    <section class="hero">
+        <div class="hero-left">
+            <div class="image-container">
+                <img src="https://i.ibb.co/KxKyj54W/college-campus.jpg" alt="Campus" class="main-img">
+                <img src="https://i.ibb.co/HLcXTGFC/classroom.jpg" alt="Classroom">
+                <img src="https://i.ibb.co/Cp290BtQ/workshop.jpg" alt="Workshop">
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="admission-card">
+                <h3>Admissions Open For 2026</h3>
+                <p style="text-align: center; font-size: 14px; margin-top: -15px; color: #666;">arniuniv.in</p>
+                <input type="text" placeholder="Name *">
+                <input type="email" placeholder="Email *">
+                <input type="text" placeholder="Contact *">
+                <select><option>Select Program</option></select>
+                <select><option>Select Course</option></select>
+                <button style="background:var(--arni-light); color:white; border:none; width:100%; padding:15px; border-radius:5px; font-weight:bold; cursor:pointer;">APPLY NOW</button>
+            </div>
+        </div>
+    </section>
 
-<!-- LOGIN POPUP -->
-<div id="loginBox">
-    <div class="card">
-        <h2>Student Login</h2>
-        <input id="lid" placeholder="Enrollment No">
-        <input id="ldob" placeholder="DOB (DD/MM/YYYY)">
-        <input id="lpass" type="password" placeholder="Password">
-        <button onclick="doLogin()" style="width:100%;padding:12px;background:#27ae60;color:white;border:none;font-weight:bold;">LOGIN</button>
-        <p onclick="closeLogin()" style="color:red;cursor:pointer;margin-top:10px;">Cancel</p>
-    </div>
-</div>
+    <section class="guidelines-section">
+        <h2 class="section-title">GUIDELINES</h2>
+        <div class="guideline-container">
+            <div class="guideline-main-img"><img src="https://i.ibb.co/J8DtyTD/guidelines-main.jpg" alt="Guidelines"></div>
+            <div class="icon-grid">
+                <div class="icon-box"><i class="fas fa-university"></i><p>Admission Rules</p></div>
+                <div class="icon-box"><i class="fas fa-images"></i><p>Image Gallery</p></div>
+                <div class="icon-box"><i class="fas fa-graduation-cap"></i><p>Admission Flow</p></div>
+                <div class="icon-box"><i class="fas fa-id-card"></i><p>Employee Login</p></div>
+                <div class="icon-box"><i class="fas fa-file-invoice"></i><p>Fee Structure</p></div>
+                <div class="icon-box"><i class="fas fa-user-check"></i><p>Registration Form</p></div>
+                <div class="icon-box"><i class="fas fa-book"></i><p>Curriculum</p></div>
+                <div class="icon-box"><i class="fas fa-bullhorn"></i><p>Notification</p></div>
+                <div class="icon-box"><i class="fas fa-users"></i><p>Student Corner</p></div>
+                <div class="icon-box"><i class="fas fa-handshake"></i><p>Placement</p></div>
+            </div>
+        </div>
+    </section>
 
-<script>
-function openLogin(){ document.getElementById("loginBox").style.display="flex"; }
-function closeLogin(){ document.getElementById("loginBox").style.display="none"; }
+    <section class="program-selector">
+        <h2 style="margin-bottom: 30px;">Know Your Program</h2>
+        <div class="selector-row">
+            <div class="selector-item"><label>Program</label><select><option>Engineering</option></select></div>
+            <div class="selector-item"><label>Course</label><select><option>Bachelor of Technology</option></select></div>
+            <div class="selector-item"><label>Specialization</label><select><option>Data Science</option></select></div>
+            <button style="background:#007bff; color:white; padding:12px 30px; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">APPLY NOW</button>
+        </div>
+    </section>
 
-const students={
-  "AN11CE3408":{ dob:"25/01/1988", pass:"SAKETAN11" },
-  "AN21CE87654":{ dob:"11/10/2001", pass:"Sonu@01" }
-};
+    <section class="leadership">
+        <h2>Top Leadership</h2>
+        <div class="leader-grid">
+            <div class="leader-card"><img src="https://i.ibb.co/HLcXTGFC/leader1.jpg" alt="L1"><h4>Dr. Vivek Singh</h4><p>Chancellor</p></div>
+            <div class="leader-card"><img src="https://i.ibb.co/27rszFzf/leader2.jpg" alt="L2"><h4>Ms. Mehr Un Nisa</h4><p>OSD</p></div>
+            <div class="leader-card"><img src="https://i.ibb.co/Cp290BtQ/leader3.jpg" alt="L3"><h4>Prof. R.K. Pandey</h4><p>VC</p></div>
+            <div class="leader-card"><img src="https://i.ibb.co/3mRRJyvL/leader4.jpg" alt="L4"><h4>Prof. Manish Srivastava</h4><p>Pro VC</p></div>
+            <div class="leader-card"><img src="https://i.ibb.co/KxKyj54W/leader5.jpg" alt="L5"><h4>Dr. Trilochan Singh</h4><p>Registrar</p></div>
+        </div>
+    </section>
 
-function doLogin(){
-  const id=lid.value.trim();
-  const dob=ldob.value.trim();
-  const pass=lpass.value.trim();
-  if(students[id] && students[id].dob===dob && students[id].pass===pass){
-    window.location.href="dashboard.html";
-  }else{
-    alert("Invalid Login Details");
-  }
-}
-</script>
-
+    <footer>
+        <div class="footer-container">
+            <div class="footer-box">
+                <h3>HELP DESK</h3>
+                <p><i class="fas fa-map-marker-alt" style="color:var(--arni-yellow)"></i> Arni University, Kathgarh, Indora, H.P. - 176401</p>
+                <p><i class="fas fa-phone" style="color:var(--arni-yellow)"></i> +91-8091580555</p>
+                <p><i class="fas fa-envelope" style="color:var(--arni-yellow)"></i> arniuniv.in</p>
+            </div>
+            <div class="footer-box"><h3>ADMISSIONS</h3><ul><li><a href="#">How to Apply</a></li><li><a href="#">Scholarship</a></li><li><a href="#">Fee Structure</a></li></ul></div>
+            <div class="footer-box"><h3>OTHER LINKS</h3><ul><li><a href="#">Gallery</a></li><li><a href="#">Contact Us</a></li><li><a href="#">UGC e-samadhan</a></li></ul></div>
+            <div class="footer-box"><h3>CONNECT</h3><ul><li><a href="#">Leadership</a></li><li><a href="#">Faculties</a></li><li><a href="#">RTI</a></li></ul></div>
+        </div>
+        <div class="copyright-bar"><p>© 2011 ARNI University | All Rights Reserved</p></div>
+    </footer>
 </body>
+
 </html>
+
