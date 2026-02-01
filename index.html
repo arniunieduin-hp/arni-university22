@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-site-verification" content="897zPHGahS8curCOwzhB0_DjBOb7z3gFRq_2tkg7kgw" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARNI University | Bringing Ambition to Life</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --arni-dark: #003d29;
+            --arni-light: #27ae60;
+            --arni-yellow: #f1c40f;
+            --bg-gray: #f8f9fa;
+        }
+        body, html { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+
+        .top-nav { background: #f0fdf4; padding: 10px 5%; display: flex; justify-content: flex-end; gap: 12px; font-size: 13px; border-bottom: 1px solid #dcfce7; }
+        .top-nav a { text-decoration: none; color: #166534; font-weight: 600; padding: 5px 12px; border-radius: 4px; border: 1px solid #bbf7d0; }
+
+        header { background: var(--arni-dark); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 65px; }
+        .nav-links { display: flex; list-style: none; gap: 15px; margin: 0; }
+        .nav-links li a { color: white; text-decoration: none; font-size: 11px; font-weight: 700; }
+
+        .hero { display: flex; height: 85vh; background: linear-gradient(to right, #fff 55%, #e6f7ef 45%); }
+        .hero-left { width: 55%; padding: 40px 5%; }
+        .image-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .image-container img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
+        .image-container img.main-img { grid-column: span 2; height: 300px; }
+
+        footer { background: #002b1d; color: white; padding: 40px 5%; text-align: center; }
+
+        /* LOGIN OVERLAY */
+        #loginBox{
+            display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.6);
+            z-index:9999;
+            align-items:center;
+            justify-content:center;
+        }
+        #loginBox .card{
+            background:#fff;
+            width:360px;
+            padding:30px;
+            border-radius:12px;
+            text-align:center;
+        }
+        #loginBox input{
+            width:100%;
+            padding:10px;
+            margin:8px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-nav">
+    <a href="#">Public Notice</a>
+    <a href="#">Alumni Meet</a>
+    <a href="#" onclick="openLogin()" style="background:#bbf7d0;">Student Login</a>
+</div>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">
+        <img src="https://i.ibb.co/V0nT8RJN/arni-new-logo.png">
+    </div>
+    <ul class="nav-links">
+        <li><a href="#">ACADEMIC</a></li>
+        <li><a href="#">ADMISSIONS</a></li>
+        <li><a href="#">CAMPUS LIFE</a></li>
+        <li><a href="#">ABOUT</a></li>
+    </ul>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-left">
+        <div class="image-container">
+            <img src="https://i.ibb.co/KxKyj54W/college-campus.jpg" class="main-img">
+            <img src="https://i.ibb.co/HLcXTGFC/classroom.jpg">
+            <img src="https://i.ibb.co/Cp290BtQ/workshop.jpg">
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2011 ARNI University | All Rights Reserved
+</footer>
+
+<!-- LOGIN POPUP -->
+<div id="loginBox">
+    <div class="card">
+        <h2>Student Login</h2>
+        <input id="lid" placeholder="Enrollment No">
+        <input id="ldob" placeholder="DOB (DD/MM/YYYY)">
+        <input id="lpass" type="password" placeholder="Password">
+        <button onclick="doLogin()" style="width:100%;padding:12px;background:#27ae60;color:white;border:none;font-weight:bold;">LOGIN</button>
+        <p onclick="closeLogin()" style="color:red;cursor:pointer;margin-top:10px;">Cancel</p>
+    </div>
+</div>
+
+<script>
+function openLogin(){ document.getElementById("loginBox").style.display="flex"; }
+function closeLogin(){ document.getElementById("loginBox").style.display="none"; }
+
+const students={
+  "AN11CE3408":{ dob:"25/01/1988", pass:"SAKETAN11" },
+  "AN21CE87654":{ dob:"11/10/2001", pass:"Sonu@01" }
+};
+
+function doLogin(){
+  const id=lid.value.trim();
+  const dob=ldob.value.trim();
+  const pass=lpass.value.trim();
+  if(students[id] && students[id].dob===dob && students[id].pass===pass){
+    window.location.href="dashboard.html";
+  }else{
+    alert("Invalid Login Details");
+  }
+}
+</script>
+
+</body>
+</html>
