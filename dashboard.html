@@ -1,111 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arni University - Student ERP Portal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arni University - Student ERP Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #004d40; --secondary: #00796b; --bg: #f8f9fa; --border: #ddd; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); display: flex; height: 100vh; overflow: hidden; }
+        .hidden { display: none !important; }
 
-<link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        /* AccSoft Login Page */
+        .login-overlay { position: fixed; width: 100%; height: 100%; background: linear-gradient(135deg, #004d40 0%, #002d26 100%); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+        .login-card { background: white; padding: 40px; border-radius: 15px; width: 360px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); text-align: center; border-top: 6px solid #ffc107; }
+        .login-card h2 { color: var(--primary); margin: 10px 0; font-size: 22px; }
+        .login-card p { font-size: 11px; color: #666; font-weight: 600; text-transform: uppercase; }
+        .login-card input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        .login-btn { width: 100%; padding: 13px; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
 
-<style>
-:root { --primary:#004d40; --secondary:#00796b; --bg:#f8f9fa; --border:#ddd; }
-body{font-family:'Segoe UI';margin:0;background:var(--bg);display:flex;height:100vh;overflow:hidden}
-.hidden{display:none!important}
+        /* Sidebar & Navigation */
+        .sidebar { width: 280px; background: white; border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+        .sidebar-header { padding: 20px; background: var(--primary); color: white; text-align: center; }
+        .nav-menu { flex: 1; overflow-y: auto; }
+        .nav-item { padding: 14px 20px; border-bottom: 1px solid #f1f1f1; display: flex; align-items: center; gap: 12px; font-size: 13px; color: #444; cursor: pointer; }
+        .nav-item i { width: 20px; color: var(--secondary); font-size: 16px; }
+        .nav-item:hover { background: #e0f2f1; color: var(--primary); }
+        .nav-active { border-left: 5px solid #ffc107; background: #f0f7f6; font-weight: 600; }
 
-/* Sidebar */
-.sidebar{width:280px;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column}
-.sidebar-header{padding:20px;background:var(--primary);color:#fff;text-align:center}
-.nav-menu{flex:1;overflow-y:auto}
-.nav-item{padding:14px 20px;border-bottom:1px solid #f1f1f1;display:flex;gap:12px;font-size:13px;color:#444;cursor:pointer}
-.nav-item i{width:20px;color:var(--secondary)}
-.nav-item:hover{background:#e0f2f1}
-.nav-active{border-left:5px solid #ffc107;background:#f0f7f6;font-weight:600}
+        /* Main Portal View */
+        .main-view { flex: 1; overflow-y: auto; padding: 30px; }
+        .top-nav { background: white; padding: 15px 30px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; font-size: 13px; }
 
-/* Main */
-.main-view{flex:1;overflow-y:auto;padding:30px}
-.top-nav{background:#fff;padding:15px 30px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+        /* Document Styling */
+        .a4-paper { background: white; width: 210mm; min-height: 297mm; padding: 15mm; margin: 10px auto; border: 1.5px solid #000; position: relative; box-sizing: border-box; color: #000; }
+        .table-data { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .table-data td, .table-data th { border: 1px solid #000; padding: 8px; font-size: 12px; text-align: left; }
+        .th-bg { background: #f2f2f2; font-weight: bold; text-align: center; }
 
-/* Paper */
-.a4-paper{background:#fff;width:210mm;min-height:297mm;padding:15mm;margin:10px auto;border:1.5px solid #000}
-.table-data{width:100%;border-collapse:collapse;margin-top:15px}
-.table-data td,.table-data th{border:1px solid #000;padding:8px;font-size:12px}
-.th-bg{background:#f2f2f2;font-weight:bold;text-align:center}
+        /* ID Card Layout */
+        .id-grid { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; padding: 20px; }
+        .id-box { width: 340px; height: 215px; border: 1.5px solid #000; border-radius: 12px; overflow: hidden; background: #fff; position: relative; }
+        .id-back { background: #f9f9f9; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; font-size: 11px; }
 
-/* ID Card */
-.id-grid{display:flex;flex-wrap:wrap;gap:25px;justify-content:center}
-.id-box{width:340px;height:215px;border:1.5px solid #000;border-radius:12px;overflow:hidden}
-.id-back{background:#f9f9f9;padding:15px;font-size:11px}
-</style>
+        @media print { .no-print { display: none !important; } .a4-paper { border: none; margin: 0; width: 100%; box-shadow: none; } }
+    </style>
 </head>
-
 <body>
 
-<div id="portal" style="display:flex;width:100%">
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-card">
+            <img src="https://i.ibb.co/V0nT8RJN/arni-new-logo.png" style="width: 80px; margin-bottom: 10px;">
+            <h2>ARNI UNIVERSITY</h2>
+            <p>AccSoft Student ERP Login</p>
+            <input type="text" id="stuID" placeholder="Enrollment No">
+            <input type="text" id="stuDOB" placeholder="DOB (DD/MM/YYYY)">
+            <input type="password" id="stuPass" placeholder="Password">
+            <button class="login-btn" onclick="checkAuth()">SIGN IN</button>
+            <div style="margin-top: 15px; font-size: 10px; color: #999;">Powered by AccSoft 2.0</div>
+        </div>
+    </div>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-<div class="sidebar-header">
-<img src="https://i.ibb.co/V0nT8RJN/arni-new-logo.png" width="50">
-<div>STUDENT DESKTOP</div>
-</div>
+    <div id="portal" class="hidden" style="display: flex; width: 100%;">
+        <div class="sidebar no-print">
+            <div class="sidebar-header">
+                <img src="https://i.ibb.co/V0nT8RJN/arni-new-logo.png" style="width: 50px; background: white; border-radius: 50%; padding: 4px;">
+                <div style="margin-top: 10px; font-size: 14px; font-weight: 600;">STUDENT DESKTOP</div>
+            </div>
+            <div class="nav-menu">
+                <div class="nav-item nav-active" onclick="view('dash', this)"><i class="fa fa-home"></i> Dashboard</div>
+                <div class="nav-item" onclick="view('academic', this)"><i class="fa fa-graduation-cap"></i> 1. Academic Details</div>
+                <div class="nav-item" onclick="view('geninfo', this)"><i class="fa fa-user-circle"></i> 2. General Info</div>
+                <div class="nav-item" onclick="view('slip', this)"><i class="fa fa-file-invoice"></i> 3. Registration Slip</div>
+                <div class="nav-item" onclick="view('id', this)"><i class="fa fa-id-badge"></i> 4. Identity Card</div>
+                <div class="nav-item" onclick="view('att', this)"><i class="fa fa-clock"></i> 5. Attendance</div>
+                <div class="nav-item" onclick="view('notif', this)"><i class="fa fa-bell"></i> 6. Notification</div>
+                <div class="nav-item" onclick="view('form', this)"><i class="fa fa-edit"></i> 7. Examination Form</div>
+                <div class="nav-item" onclick="view('res', this)"><i class="fa fa-poll"></i> 8. Result</div>
+                <div class="nav-item" onclick="view('lock', this)"><i class="fa fa-lock"></i> 9. Student Locker</div>
+                <div class="nav-item" onclick="view('stuinfo', this)"><i class="fa fa-info-circle"></i> 10. Student Info</div>
+                <div class="nav-item" style="color:red; margin-top:20px;" onclick="location.reload()"><i class="fa fa-power-off"></i> Logout</div>
+            </div>
+        </div>
 
-<div class="nav-menu">
-<div class="nav-item nav-active" onclick="view('dash',this)"><i class="fa fa-home"></i>Dashboard</div>
-<div class="nav-item" onclick="view('academic',this)"><i class="fa fa-graduation-cap"></i>1. Academic Details</div>
-<div class="nav-item" onclick="view('geninfo',this)"><i class="fa fa-user-circle"></i>2. General Info</div>
-<div class="nav-item" onclick="view('slip',this)"><i class="fa fa-file-invoice"></i>3. Registration Slip</div>
-<div class="nav-item" onclick="view('id',this)"><i class="fa fa-id-badge"></i>4. Identity Card</div>
-<div class="nav-item" onclick="view('att',this)"><i class="fa fa-clock"></i>5. Attendance</div>
-<div class="nav-item" onclick="view('notif',this)"><i class="fa fa-bell"></i>6. Notification</div>
-<div class="nav-item" onclick="view('form',this)"><i class="fa fa-edit"></i>7. Examination Form</div>
-<div class="nav-item" onclick="view('res',this)"><i class="fa fa-poll"></i>8. Result</div>
-<div class="nav-item" onclick="view('lock',this)"><i class="fa fa-lock"></i>9. Student Locker</div>
-<div class="nav-item" onclick="view('stuinfo',this)"><i class="fa fa-info-circle"></i>10. Student Info</div>
-</div>
-</div>
+        <div class="main-view">
+            <div class="top-nav no-print">
+                <div style="line-height: 1.2;">
+                    <b>NAME:</b> SAKET BIHARI<br>
+                    <b>ENROLL:</b> AN11CE3408 | <b>COURSE:</b> B.TECH (Civil) | <b>SESSION:</b> 2011-2015
+                </div>
+                <img src="https://i.ibb.co/B2zShwtv/student.jpg" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--primary);">
+            </div>
 
-<!-- RIGHT -->
-<div class="main-view">
+            <div id="v-dash" class="panel">
+                <div style="background:white; padding:30px; border-radius:10px; border:1px solid #ddd;">
+                    <h2>Welcome to AccSoft Desktop, Saket Bihari</h2>
+                    <p>Current Status: <b>Active</b> | Address: <b>Aurangabad, Bihar</b></p>
+                </div>
+            </div>
 
-<div class="top-nav">
-<div>
-<b>NAME:</b> SAKET BIHARI<br>
-<b>ENROLL:</b> AN11CE3408 | <b>COURSE:</b> B.TECH (Civil)
-</div>
-<img src="https://i.ibb.co/B2zShwtv/student.jpg" width="45" style="border-radius:50%">
-</div>
+            <div id="v-academic" class="panel hidden">
+                <div class="a4-paper" style="min-height: auto;">
+                    <h2 style="text-align:center; border-bottom: 2px solid #000; padding-bottom: 10px;">STUDENT ACADEMIC PROFILE</h2>
+                    <table class="table-data">
+                        <tr><td class="th-bg" colspan="2">PERSONAL DATA</td></tr>
+                        <tr><td><b>Name:</b> SAKET BIHARI</td><td><b>Father's Name:</b> KASHINATH SHARMA</td></tr>
+                        <tr><td><b>Aadhar No:</b> XXXX-XXXX-3408</td><td><b>Mobile:</b> +91-XXXXXXXXXX</td></tr>
+                        <tr><td><b>Email ID:</b> saket.bihari@email.com</td><td><b>DOB:</b> 25/01/1988</td></tr>
+                        <tr><td><b>10th Board:</b> BSEB Patna</td><td><b>12th Board:</b> BSEB Patna</td></tr>
+                        <tr><td colspan="2"><b>Address:</b> Near Surya Mandir, Shamsher Nagar, Aurangabad, Bihar - 824113</td></tr>
+                    </table>
+                </div>
+            </div>
 
-<!-- DASHBOARD -->
-<div id="v-dash" class="panel">
-<div style="background:#fff;padding:30px;border-radius:10px">
-<h2>Welcome to AccSoft Desktop</h2>
-<p>Status: <b>Active</b> | Address: <b>Aurangabad, Bihar</b></p>
-</div>
-</div>
+            <div id="v-slip" class="panel hidden">
+                <div class="a4-paper">
+                    <div style="text-align:center; border-bottom: 2.5px solid #000; padding-bottom: 10px;">
+                        <img src="https://i.ibb.co/V0nT8RJN/arni-new-logo.png" style="width: 70px;">
+                        <h1 style="margin:5px 0; font-size: 26px;">ARNI UNIVERSITY</h1>
+                        <h2 style="margin:10px 0; font-size: 18px; text-decoration: underline;">PROVISIONAL REGISTRATION SLIP</h2>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                        <table class="table-data" style="width:78%; margin:0;">
+                            <tr><td><b>Candidate Name:</b></td><td>SAKET BIHARI</td></tr>
+                            <tr><td><b>Father's Name:</b></td><td>KASHINATH SHARMA</td></tr>
+                            <tr><td><b>Date of Birth:</b></td><td>25/01/1988</td></tr>
+                            <tr><td><b>Aadhar Number:</b></td><td>XXXX-XXXX-3408</td></tr>
+                            <tr><td><b>Enrollment No:</b></td><td>AN11CE3408</td></tr>
+                            <tr><td><b>Course / Session:</b></td><td>B.TECH (Civil) / 2011-15</td></tr>
+                        </table>
+                        <img src="https://i.ibb.co/B2zShwtv/student.jpg" style="width:110px; border:2px solid #000; padding:2px;">
+                    </div>
+                </div>
+            </div>
 
-<div id="v-academic" class="panel hidden"><div class="a4-paper"><h2>Academic Details</h2></div></div>
-<div id="v-geninfo" class="panel hidden"><div class="a4-paper"><h2>General Info</h2></div></div>
-<div id="v-slip" class="panel hidden"><div class="a4-paper"><h2>Registration Slip</h2></div></div>
-<div id="v-id" class="panel hidden"><div class="a4-paper"><h2>ID Card</h2></div></div>
-<div id="v-att" class="panel hidden"><div class="a4-paper"><h2>Attendance</h2></div></div>
-<div id="v-notif" class="panel hidden"><div class="a4-paper"><h2>Notifications</h2></div></div>
-<div id="v-form" class="panel hidden"><div class="a4-paper"><h2>Exam Form</h2></div></div>
-<div id="v-res" class="panel hidden"><div class="a4-paper"><h2>Result</h2></div></div>
-<div id="v-lock" class="panel hidden"><div class="a4-paper"><h2>Locker</h2></div></div>
-<div id="v-stuinfo" class="panel hidden"><div class="a4-paper"><h2>Student Info</h2></div></div>
+            <div id="v-id" class="panel hidden">
+                <div class="id-grid">
+                    <div class="id-box">
+                        <div style="background:var(--primary); color:white; padding:8px; text-align:center; font-weight:bold; display:flex; align-items:center; justify-content:center; gap:5px;">
+                            <img src="https://i.ibb.co/V0nT8RJN/arni-new-logo.png" style="width:25px; background:white; border-radius:50%;">
+                            <span>ARNI UNIVERSITY</span>
+                        </div>
+                        <div style="display:flex; padding:15px; gap:12px;">
+                            <img src="https://i.ibb.co/B2zShwtv/student.jpg" style="width:85px; height:105px; border:1px solid #ddd;">
+                            <div style="font-size:11px;">
+                                <h3 style="margin:0; color:var(--primary);">SAKET BIHARI</h3>
+                                <p style="margin:4px 0;"><b>Enroll:</b> AN11CE3408</p>
+                                <p style="margin:4px 0;"><b>Course:</b> B.Tech (Civil)</p>
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=AN11CE3408" style="margin-top:5px; width:45px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="id-box id-back">
+                        <div style="padding:10px;">
+                            <p style="font-weight:bold; border-bottom:1px solid #ddd;">ADDRESS & BLOOD GROUP</p>
+                            <p>Near Surya Mandir, Aurangabad, Bihar - 824113</p>
+                            <p>Blood Group: <b>B+</b></p>
+                        </div>
+                        <div style="background:var(--primary); color:white; text-align:center; padding:5px; font-size:10px;">Website: arniuniv.in</div>
+                    </div>
+                </div>
+            </div>
 
-</div>
-</div>
+            <div id="v-notif" class="panel hidden">
+                <div style="background:white; padding:20px; border-radius:10px; border-left: 5px solid #ffc107; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h3 style="margin-top:0;"><i class="fa fa-bell"></i> Latest Notifications</h3>
+                    <p><b>ANNUAL CONVOCATION 2026:</b> All students of batch 2011-15 are invited to register for the upcoming convocation ceremony.</p>
+                </div>
+            </div>
 
-<script>
-function view(id,el){
-document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));
-document.getElementById('v-'+id).classList.remove('hidden');
-document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('nav-active'));
-el.classList.add('nav-active');
-}
-</script>
+            <div id="v-form" class="panel hidden">
+                <div class="a4-paper" style="min-height: auto;">
+                    <h2 style="text-align:center; border-bottom: 2px solid #000; padding-bottom: 10px;">EXAMINATION FORM SUBMISSION STATUS</h2>
+                    <table class="table-data">
+                        <thead>
+                            <tr class="th-bg">
+                                <th>Semester</th>
+                                <th>Academic Session</th>
+                                <th>Submission Date</th>
+                                <th>Status</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>3rd Semester</b></td>
+                                <td>2012-2013</td>
+                                <td>14/11/2012</td>
+                                <td style="color: green; font-weight: bold;"><i class="fa fa-check-circle"></i> SUBMITTED</td>
+                                <td>Fee Paid</td>
+                            </tr>
+                            <tr>
+                                <td><b>4th Semester</b></td>
+                                <td>2012-2013</td>
+                                <td>18/05/2013</td>
+                                <td style="color: green; font-weight: bold;"><i class="fa fa-check-circle"></i> SUBMITTED</td>
+                                <td>Fee Paid</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
+            <div id="v-res" class="panel hidden">
+                <div class="no-print" style="text-align:center; margin-bottom: 20px;">
+                    <select id="semSearch" style="padding: 10px; width: 250px;">
+                        <option value="1">1st Semester (FEB-2012)</option>
+                        <option value="2">2nd Semester (JULY-2012)</option>
+                    </select>
+                    <button class="login-btn" style="width: 100px; display: inline; margin-left: 10px;" onclick="searchResult()">Search</button>
+                    <button class="login-btn" style="width: 100px; background:#333; margin-left:10px;" onclick="window.print()">Print</button>
+                </div>
+                <div id="resPaper" class="hidden">
+                    <div class="a4-paper">
+                        <div style="text-align:center; border-bottom: 2px solid #000; padding-bottom: 10px;">
+                            <img src="https://i.ibb.co/V0nT8RJN/arni-new-logo.png" style="width: 60px;">
+                            <h2 style="margin:0;">ARNI UNIVERSITY, KANGRA (H.P.)</h2>
+                            <h3 id="resHeader" style="background:#f2f2f2; border:1px solid #000; margin:10px 0; padding:5px;"></h3>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; margin:15px 0; border:1px solid #000; padding:10px;">
+                            <div style="font-size:12px; line-height: 1.6;">
+                                <b>NAME:</b> SAKET BIHARI | <b>ROLL:</b> AN11CE3408<br>
+                                <b>FATHER:</b> KASHINATH SHARMA | <b>DOB:</b> 25/01/1988<br>
+                                <b>COURSE:</b> B.TECH (Civil Engineering)
+                            </div>
+                            <img src="https://i.ibb.co/B2zShwtv/student.jpg" style="width:80px; border:1px solid #000;">
+                        </div>
+                        <table class="table-data" id="resTable"></table>
+                        <div id="resFooter" style="margin-top: 20px; font-weight: bold; border-bottom: 1px dashed #000; padding-bottom: 10px;"></div>
+                        <p style="font-size: 10px;"><b>GUIDELINES:</b> Computer-generated statement. Produce original for verification.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="v-geninfo" class="panel hidden"><div class="a4-paper"><h3>General Info</h3></div></div>
+            <div id="v-att" class="panel hidden"><div style="background:#e0f2f1; padding:20px;"><b>Attendance Status: 82%</b></div></div>
+            <div id="v-lock" class="panel hidden"><div style="text-align:center; padding:50px;"><i class="fa fa-lock fa-4x"></i><p style="color:red;">Clear NO DUES for documents.</p></div></div>
+            <div id="v-stuinfo" class="panel hidden"><div class="a4-paper"><h3>Student Info Section</h3></div></div>
+        </div>
+    </div>
+
+    <script>
+        function checkAuth() {
+            const id = document.getElementById('stuID').value;
+            const dob = document.getElementById('stuDOB').value;
+            const pass = document.getElementById('stuPass').value;
+            if(id === 'AN11CE3408' && dob === '25/01/1988' && pass === 'SAKETAN11') {
+                document.getElementById('loginOverlay').classList.add('hidden');
+                document.getElementById('portal').classList.remove('hidden');
+            } else { alert('Access Denied: Invalid Credentials!'); }
+        }
+
+        function view(id, el) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.add('hidden'));
+            const target = document.getElementById('v-' + id);
+            if(target) target.classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('nav-active'));
+            if(el) el.classList.add('nav-active');
+        }
+
+        function searchResult() {
+            const sem = document.getElementById('semSearch').value;
+            const table = document.getElementById('resTable');
+            document.getElementById('resPaper').classList.remove('hidden');
+            if(sem == "1") {
+                document.getElementById('resHeader').innerText = "STATEMENT OF GRADES - FEB 2012";
+                table.innerHTML = `<tr class="th-bg"><td>Code</td><td>Subject</td><td>Credits</td><td>Grade</td></tr>
+                <tr><td>CE(101)</td><td>ENGG MATH-1</td><td>4</td><td>A</td></tr>
+                <tr><td>CE(102)</td><td>ENGG PHYSICS</td><td>4</td><td>B</td></tr>
+                <tr><td>CE(103)</td><td>BASIC CIVIL</td><td>4</td><td>A+</td></tr>
+                <tr><td>CE(104)</td><td>ENGG MECH</td><td>3</td><td>C</td></tr>
+                <tr><td>CE(105)</td><td>WORKSHOP PRAC</td><td>3</td><td>A+</td></tr>
+                <tr><td>CE(106)-P</td><td>PHYSICS LAB</td><td>1</td><td>A</td></tr>
+                <tr><td>CE(107)-P</td><td>MECH LAB</td><td>1</td><td>B</td></tr>
+                <tr><td>CE(108)-P</td><td>WORKSHOP LAB</td><td>2</td><td>A</td></tr>`;
+                document.getElementById('resFooter').innerText = "SGPA: 8.1 | CGPA: 7.91 | RESULT: PASSED";
+            } else {
+                document.getElementById('resHeader').innerText = "STATEMENT OF GRADES - JULY 2012";
+                table.innerHTML = `<tr class="th-bg"><td>Code</td><td>Subject</td><td>Credits</td><td>Grade</td></tr>
+                <tr><td>AU-BTC-201</td><td>MATH-II</td><td>4</td><td>B+</td></tr>
+                <tr><td>AU-BTC-202</td><td>PROG IN C</td><td>4</td><td>A</td></tr>
+                <tr><td>AU-BTC-203</td><td>ENGG MECH</td><td>4</td><td>B</td></tr>
+                <tr><td>AU-BTC-205</td><td>ENV STUDIES</td><td>3</td><td>A</td></tr>
+                <tr><td>AU-BTC-207</td><td>BASIC MECH</td><td>3</td><td>B+</td></tr>
+                <tr><td>CE(206)-P</td><td>C PROG LAB</td><td>1</td><td>A</td></tr>
+                <tr><td>CE(207)-P</td><td>MECH LAB</td><td>1</td><td>A+</td></tr>
+                <tr><td>CE(208)-P</td><td>WORKSHOP PRACTICE</td><td>2</td><td>A</td></tr>`;
+                document.getElementById('resFooter').innerText = "SGPA: 7.9 | CGPA: 7.51 | RESULT: PASSED";
+            }
+        }
+    </script>
 </body>
 </html>
